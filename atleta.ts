@@ -4,7 +4,11 @@ enum TipologiaAtleta {
     Dilettante = 'dilettante'
 }
 
-
+// Interfaccia per gli atleti che possono iscriversi alla federazione
+interface IscrivibileAllaFederazione {
+    // Restituisce true se l'atleta può essere iscritto alla federazione
+    iscrivibileAllaFederazione(): boolean;
+}
 
 abstract class Atleta {
 
@@ -55,7 +59,7 @@ abstract class Atleta {
 }
 
 
-class AtletaProfessionista extends Atleta {
+class AtletaProfessionista extends Atleta implements IscrivibileAllaFederazione {
     constructor(
         codiceAtleta: number,
         nome: string,
@@ -66,14 +70,20 @@ class AtletaProfessionista extends Atleta {
     ) {
         super(codiceAtleta, nome, cognome, dataNascita, meseIscrizione, TipologiaAtleta.Professionista, quotaAnnuale);
     }
+
     // Il costo per un atleta professionista è sempre 0
     getCostoIscrizione(): number {
         return 0;
     }
+
+    // Implementazione dell'interfaccia per indicare che questo atleta può essere iscritto
+    iscrivibileAllaFederazione(): boolean {
+        return true; // L'atleta può essere iscritto
+    }
 }
 
 
-class AtletaSemiProfessionista extends Atleta {
+class AtletaSemiProfessionista extends Atleta implements IscrivibileAllaFederazione {
     constructor(
         codiceAtleta: number,
         nome: string,
@@ -84,9 +94,15 @@ class AtletaSemiProfessionista extends Atleta {
     ) {
         super(codiceAtleta, nome, cognome, dataNascita, meseIscrizione, TipologiaAtleta.SemiProfessionista, quotaAnnuale);
     }
+
     // Il costo per un atleta semi-professionista è variabile tra 100 e 250
     getCostoIscrizione(): number {
         return this.quotaAnnuale;
+    }
+
+    // Implementazione dell'interfaccia per indicare che questo atleta può essere iscritto
+    iscrivibileAllaFederazione(): boolean {
+        return true; // L'atleta può essere iscritto
     }
 }
 

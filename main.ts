@@ -2,7 +2,7 @@ import { AtletaProfessionista, AtletaSemiProfessionista, AtletaDilettante } from
 import { Federazione } from './federazione';
 
 // Creazione delle federazioni
-let federazione1 = new Federazione(1);
+const federazione1 = new Federazione<AtletaProfessionista | AtletaSemiProfessionista >(1);
 let federazione2 = new Federazione(2);
 
 // Creazione degli atleti

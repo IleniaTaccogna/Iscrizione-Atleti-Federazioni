@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const atleta_1 = require("./atleta");
 const federazione_1 = require("./federazione");
 // Creazione delle federazioni
-let federazione1 = new federazione_1.Federazione(1);
+const federazione1 = new federazione_1.Federazione(1);
 let federazione2 = new federazione_1.Federazione(2);
 // Creazione degli atleti
 let atleta1 = new atleta_1.AtletaProfessionista(101, 'Giovanni', 'Rossi', new Date(1990, 0, 1), 2, 0);

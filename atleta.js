@@ -53,6 +53,10 @@ class AtletaProfessionista extends Atleta {
     getCostoIscrizione() {
         return 0;
     }
+    // Implementazione dell'interfaccia per indicare che questo atleta può essere iscritto
+    iscrivibileAllaFederazione() {
+        return true; // L'atleta può essere iscritto
+    }
 }
 exports.AtletaProfessionista = AtletaProfessionista;
 class AtletaSemiProfessionista extends Atleta {
@@ -62,6 +66,10 @@ class AtletaSemiProfessionista extends Atleta {
     // Il costo per un atleta semi-professionista è variabile tra 100 e 250
     getCostoIscrizione() {
         return this.quotaAnnuale;
+    }
+    // Implementazione dell'interfaccia per indicare che questo atleta può essere iscritto
+    iscrivibileAllaFederazione() {
+        return true; // L'atleta può essere iscritto
     }
 }
 exports.AtletaSemiProfessionista = AtletaSemiProfessionista;

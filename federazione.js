@@ -1,7 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Federazione = void 0;
-const atleta_1 = require("./atleta");
 class Federazione {
     constructor(codiceFederazione) {
         this.codiceFederazione = codiceFederazione;
@@ -14,12 +13,9 @@ class Federazione {
             console.log("La federazione ha già il numero massimo di atleti.");
             return false;
         }
-        if (atleta instanceof atleta_1.AtletaDilettante) {
-            console.log("La federazione non accetta atleti dilettanti.");
-            return false;
-        }
         this.atletiIscritti.push(atleta);
         this.numeroAtletiIscritti++;
+        console.log(`Atleta ${atleta.getDatiAnagrafici()} iscritto con successo.`);
         return true;
     }
     // Rimozione di un atleta dalla federazione
@@ -28,6 +24,10 @@ class Federazione {
         if (index !== -1) {
             this.atletiIscritti.splice(index, 1);
             this.numeroAtletiIscritti--;
+            console.log(`Atleta ${atleta.getDatiAnagrafici()} rimosso.`);
+        }
+        else {
+            console.log("Atleta non trovato.");
         }
     }
     // Elenco degli atleti iscritti, ordinato per mese di iscrizione
