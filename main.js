@@ -1,26 +1,32 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const atleta_1 = require("./atleta");
-const federazione_1 = require("./federazione");
+const athlete_1 = require("./athlete");
+const federation_1 = require("./federation");
 // Creazione delle federazioni
-const federazione1 = new federazione_1.Federazione(1);
-let federazione2 = new federazione_1.Federazione(2);
+const federation1 = new federation_1.Federation(1);
+let federation2 = new federation_1.Federation(2);
 // Creazione degli atleti
-let atleta1 = new atleta_1.AtletaProfessionista(101, 'Giovanni', 'Rossi', new Date(1990, 0, 1), 2, 0);
-let atleta2 = new atleta_1.AtletaSemiProfessionista(102, 'Marco', 'Bianchi', new Date(1995, 5, 10), 10, 100);
-let atleta3 = new atleta_1.AtletaDilettante(103, 'Luca', 'Verdi', new Date(2000, 7, 15), 8, 300);
-let atleta4 = new atleta_1.AtletaSemiProfessionista(104, 'Francesca', 'Neri', new Date(1997, 2, 20), 3, 250);
+let athlete1 = new athlete_1.ProfessionalAthlete(101, 'Giovanni', 'Rossi', new Date(1990, 0, 1), 2, 0);
+let athlete2 = new athlete_1.SemiProfessionalAthlete(102, 'Marco', 'Bianchi', new Date(1995, 5, 10), 10, 100);
+let athlete3 = new athlete_1.AmateurAthlete(103, 'Luca', 'Verdi', new Date(2000, 7, 15), 8, 300);
+let athlete4 = new athlete_1.SemiProfessionalAthlete(104, 'Francesca', 'Neri', new Date(1997, 2, 20), 3, 250);
+let athlete5 = new athlete_1.AmateurAthlete(103, 'Silvia', 'DeNicolò', new Date(2000, 7, 15), 8, 300);
+let athlete6 = new athlete_1.ProfessionalAthlete(101, 'Ilenia', 'Taccogna', new Date(1990, 0, 1), 2, 0);
+let athlete7 = new athlete_1.ProfessionalAthlete(101, 'Nicolas', 'Fortunato', new Date(1990, 0, 1), 2, 0);
 // Iscrizione degli atleti alle federazioni
-federazione1.iscriviAtleta(atleta1);
-federazione1.iscriviAtleta(atleta2);
-federazione1.iscriviAtleta(atleta3); // Fallirà, è dilettante
-federazione2.iscriviAtleta(atleta1);
-federazione2.iscriviAtleta(atleta4);
+federation1.registerAthlete(athlete1);
+federation1.registerAthlete(athlete2);
+federation1.registerAthlete(athlete3); // Fallirà, è dilettante watson
+federation1.registerAthlete(athlete5);
+federation1.registerAthlete(athlete6);
+federation1.registerAthlete(athlete7);
+federation2.registerAthlete(athlete1);
+federation2.registerAthlete(athlete4);
 // Stampa elenco atleti della federazione 1
 console.log('Atleti della federazione 1:');
-federazione1.elencoAtleti().forEach(atleta => {
-    console.log(`${atleta.getDatiAnagrafici()}, Mese Iscrizione: ${atleta.getMeseIscrizione()}, Costo: ${atleta.getCostoIscrizione()}€`);
+federation1.listAthletes().forEach(athlete => {
+    console.log(`${athlete.getPersonalData()},  Mese Iscrizione: ${athlete.getRegistrationMonth()}, Costo: ${athlete.getRegistrationCost()}€`);
 });
 // Verifica se un atleta è iscritto a una federazione
-console.log('Ricerca atleta 102 in federazione 1:', federazione1.elencoAtleti().some(atleta => atleta.getCodiceAtleta() === 102));
-console.log('Ricerca atleta 101 in federazione 2:', federazione2.elencoAtleti().some(atleta => atleta.getCodiceAtleta() === 101));
+console.log('Ricerca atleta 102 in federazione 1:', federation1.listAthletes().some(athlete => athlete.getAthleteCode() === 102));
+console.log('Ricerca atleta 101 in federazione 2:', federation2.listAthletes().some(athlete => athlete.getAthleteCode() === 101));

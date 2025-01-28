@@ -1,0 +1,57 @@
+import  {Athlete,ProfessionalAthlete, SemiProfessionalAthlete, AmateurAthlete } from "./athlete";
+
+interface IFederation<T extends Athlete> {
+  federationCode: number;
+  registeredAthletesCount: number;
+  registeredAthletes: T[];
+
+  registerAthlete(athlete: T): boolean;
+  removeAthlete(athlete: T): void;
+  listAthletes(): T[];
+}
+
+export class Federation<T extends ProfessionalAthlete | SemiProfessionalAthlete> implements IFederation<T> {
+  federationCode: number;
+  registeredAthletesCount: number;
+  registeredAthletes: T[];
+
+  constructor(federationCode: number) {
+      this.federationCode = federationCode;
+      this.registeredAthletesCount = 0;
+      this.registeredAthletes = [];
+  }
+
+    // Iscrizione di un atleta alla federazione
+  registerAthlete(athlete: T): boolean {
+      if (this.registeredAthletesCount >= 3) {
+          console.log("La federazione ha già il numero massimo di atleti.");
+          return false;
+      }
+      // if (athlete instanceof AmateurAthlete) {
+      //   console.log("La federazione non accetta atleti dilettanti.");
+      //   return false;
+      // }
+      this.registeredAthletes.push(athlete);
+      this.registeredAthletesCount++;
+      console.log(`Atleta ${athlete.getPersonalData()} iscritto con successo.`);
+      return true; 
+  }
+
+     // Rimozione di un atleta dalla federazione
+  removeAthlete(athlete: T): void {
+      const index = this.registeredAthletes.findIndex(a => a.getAthleteCode() === athlete.getAthleteCode());
+      if (index !== -1) {
+          this.registeredAthletes.splice(index, 1);
+          this.registeredAthletesCount--;
+          console.log(`Atleta ${athlete.getPersonalData()} rimosso.`);
+      } else {
+          console.log("Atleta non trovato.");
+      }
+  }
+
+  // Elenco degli atleti iscritti, ordinato per mese di iscrizione
+  listAthletes(): T[] {
+      return this.registeredAthletes.sort((a, b) => a.getRegistrationMonth() - b.getRegistrationMonth());
+  }
+}
+
