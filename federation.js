@@ -1,6 +1,14 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Federation = void 0;
+// interface IFederation<T extends Athlete> {
+//   federationCode: number;
+//   registeredAthletesCount: number;
+//   registeredAthletes: T[];
+//   registerAthlete(athlete: T): boolean;
+//   removeAthlete(athlete: T): void;
+//   listAthletes(): T[];
+// }
 class Federation {
     constructor(federationCode) {
         this.federationCode = federationCode;

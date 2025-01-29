@@ -1,16 +1,16 @@
 import  {Athlete,ProfessionalAthlete, SemiProfessionalAthlete, AmateurAthlete } from "./athlete";
 
-interface IFederation<T extends Athlete> {
-  federationCode: number;
-  registeredAthletesCount: number;
-  registeredAthletes: T[];
+// interface IFederation<T extends Athlete> {
+//   federationCode: number;
+//   registeredAthletesCount: number;
+//   registeredAthletes: T[];
 
-  registerAthlete(athlete: T): boolean;
-  removeAthlete(athlete: T): void;
-  listAthletes(): T[];
-}
+//   registerAthlete(athlete: T): boolean;
+//   removeAthlete(athlete: T): void;
+//   listAthletes(): T[];
+// }
 
-export class Federation<T extends ProfessionalAthlete | SemiProfessionalAthlete> implements IFederation<T> {
+export class Federation<T extends ProfessionalAthlete | SemiProfessionalAthlete>  {
   federationCode: number;
   registeredAthletesCount: number;
   registeredAthletes: T[];
