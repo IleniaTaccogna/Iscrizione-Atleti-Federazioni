@@ -1,14 +1,4 @@
-enum AthleteType {
-    Professional = 'professional',
-    SemiProfessional = 'semi-professional',
-    Amateur = 'amateur'
-}
-
-// Interfaccia per gli atleti che possono iscriversi alla federazione
-interface FederableAthlete {
-    // Restituisce true se l'atleta può essere iscritto alla federazione
-    canRegisterToFederation(): boolean;
-}
+type AthleteType = 'Amateur' | 'SemiProfessional' | 'Professional';
 
 abstract class Athlete {
     lastRegistrationMonth: number = 10;
@@ -24,13 +14,13 @@ abstract class Athlete {
         if (this.registrationMonth < 1 || this.registrationMonth > this.lastRegistrationMonth) {
             throw new Error('Mese di iscrizione non valido(ottobre)');
         }
-        if (type === AthleteType.Amateur && (annualFee < 300 || annualFee > 800)) {
+        if (type === "Amateur" && (annualFee < 300 || annualFee > 800)) {
             throw new Error('Quota annua per dilettante deve essere tra 300 e 800');
         }
-        if (type === AthleteType.SemiProfessional && (annualFee < 100 || annualFee > 250)) {
+        if (type === "SemiProfessional" && (annualFee < 100 || annualFee > 250)) {
             throw new Error('Quota annua per semi-professionista deve essere tra 100 e 250');
         }
-        if (type === AthleteType.Professional && annualFee !== 0) {
+        if (type === "Professional" && annualFee !== 0) {
             throw new Error('Quota annua per professionista deve essere zero');
         }
     }
@@ -54,8 +44,12 @@ abstract class Athlete {
     }
 }
 
+// Interfaccia per gli atleti che possono iscriversi alla federazione
+interface IFederable {
+    canRegisterToFederation(): boolean;
+}
 
-class ProfessionalAthlete extends Athlete implements FederableAthlete {
+class ProfessionalAthlete extends Athlete implements IFederable {
     constructor(
         athleteCode: number,
         firstName: string,
@@ -64,7 +58,7 @@ class ProfessionalAthlete extends Athlete implements FederableAthlete {
         registrationMonth: number,
         annualFee: number,
     ) {
-        super(athleteCode, firstName, lastName, birthDate, registrationMonth, AthleteType.Professional, annualFee);
+        super(athleteCode, firstName, lastName, birthDate, registrationMonth, "Professional", annualFee);
     }
 
     // Il costo per un atleta professionista è sempre 0
@@ -78,7 +72,7 @@ class ProfessionalAthlete extends Athlete implements FederableAthlete {
     }
 }
 
-class SemiProfessionalAthlete extends Athlete implements FederableAthlete {
+class SemiProfessionalAthlete extends Athlete implements IFederable {
     constructor(
         athleteCode: number,
         firstName: string,
@@ -87,7 +81,7 @@ class SemiProfessionalAthlete extends Athlete implements FederableAthlete {
         registrationMonth: number,
         annualFee: number,
     ) {
-        super(athleteCode, firstName, lastName, birthDate, registrationMonth, AthleteType.SemiProfessional, annualFee);
+        super(athleteCode, firstName, lastName, birthDate, registrationMonth, "SemiProfessional", annualFee);
     }
 
     // Il costo per un atleta semi-professionista è variabile tra 100 e 250
@@ -110,7 +104,7 @@ class AmateurAthlete extends Athlete {
         registrationMonth: number,
         annualFee: number,
     ) {
-        super(athleteCode, firstName, lastName, birthDate, registrationMonth, AthleteType.Amateur, annualFee);
+        super(athleteCode, firstName, lastName, birthDate, registrationMonth,"Amateur", annualFee);
     }
 
     // Il costo per un atleta dilettante è variabile tra 300 e 800

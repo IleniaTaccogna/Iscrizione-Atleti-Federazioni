@@ -17,11 +17,10 @@ let athlete7 = new ProfessionalAthlete(107, 'Nicolas', 'Fortunato', new Date(199
 // Iscrizione degli atleti alle federazioni
 federation1.registerAthlete(athlete1);
 federation1.registerAthlete(athlete2);
-federation1.registerAthlete(athlete3);  // Fallirà, è dilettante watson
+federation1.registerAthlete(athlete3);  
 federation1.registerAthlete(athlete5);
 federation1.registerAthlete(athlete6);
 federation1.registerAthlete(athlete7);
-
 
 federation2.registerAthlete(athlete1);
 federation2.registerAthlete(athlete4);

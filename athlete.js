@@ -1,12 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ProfessionalAthlete = exports.SemiProfessionalAthlete = exports.AmateurAthlete = exports.Athlete = void 0;
-var AthleteType;
-(function (AthleteType) {
-    AthleteType["Professional"] = "professional";
-    AthleteType["SemiProfessional"] = "semi-professional";
-    AthleteType["Amateur"] = "amateur";
-})(AthleteType || (AthleteType = {}));
 class Athlete {
     constructor(athleteCode, firstName, lastName, birthDate, registrationMonth, type, annualFee) {
         this.athleteCode = athleteCode;
@@ -20,13 +14,13 @@ class Athlete {
         if (this.registrationMonth < 1 || this.registrationMonth > this.lastRegistrationMonth) {
             throw new Error('Mese di iscrizione non valido(ottobre)');
         }
-        if (type === AthleteType.Amateur && (annualFee < 300 || annualFee > 800)) {
+        if (type === "Amateur" && (annualFee < 300 || annualFee > 800)) {
             throw new Error('Quota annua per dilettante deve essere tra 300 e 800');
         }
-        if (type === AthleteType.SemiProfessional && (annualFee < 100 || annualFee > 250)) {
+        if (type === "SemiProfessional" && (annualFee < 100 || annualFee > 250)) {
             throw new Error('Quota annua per semi-professionista deve essere tra 100 e 250');
         }
-        if (type === AthleteType.Professional && annualFee !== 0) {
+        if (type === "Professional" && annualFee !== 0) {
             throw new Error('Quota annua per professionista deve essere zero');
         }
     }
@@ -46,7 +40,7 @@ class Athlete {
 exports.Athlete = Athlete;
 class ProfessionalAthlete extends Athlete {
     constructor(athleteCode, firstName, lastName, birthDate, registrationMonth, annualFee) {
-        super(athleteCode, firstName, lastName, birthDate, registrationMonth, AthleteType.Professional, annualFee);
+        super(athleteCode, firstName, lastName, birthDate, registrationMonth, "Professional", annualFee);
     }
     // Il costo per un atleta professionista è sempre 0
     getRegistrationCost() {
@@ -60,7 +54,7 @@ class ProfessionalAthlete extends Athlete {
 exports.ProfessionalAthlete = ProfessionalAthlete;
 class SemiProfessionalAthlete extends Athlete {
     constructor(athleteCode, firstName, lastName, birthDate, registrationMonth, annualFee) {
-        super(athleteCode, firstName, lastName, birthDate, registrationMonth, AthleteType.SemiProfessional, annualFee);
+        super(athleteCode, firstName, lastName, birthDate, registrationMonth, "SemiProfessional", annualFee);
     }
     // Il costo per un atleta semi-professionista è variabile tra 100 e 250
     getRegistrationCost() {
@@ -74,7 +68,7 @@ class SemiProfessionalAthlete extends Athlete {
 exports.SemiProfessionalAthlete = SemiProfessionalAthlete;
 class AmateurAthlete extends Athlete {
     constructor(athleteCode, firstName, lastName, birthDate, registrationMonth, annualFee) {
-        super(athleteCode, firstName, lastName, birthDate, registrationMonth, AthleteType.Amateur, annualFee);
+        super(athleteCode, firstName, lastName, birthDate, registrationMonth, "Amateur", annualFee);
     }
     // Il costo per un atleta dilettante è variabile tra 300 e 800
     getRegistrationCost() {
