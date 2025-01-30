@@ -1,14 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Federation = void 0;
-// interface IFederation<T extends Athlete> {
-//   federationCode: number;
-//   registeredAthletesCount: number;
-//   registeredAthletes: T[];
-//   registerAthlete(athlete: T): boolean;
-//   removeAthlete(athlete: T): void;
-//   listAthletes(): T[];
-// }
 class Federation {
     constructor(federationCode) {
         this.federationCode = federationCode;
@@ -21,10 +13,10 @@ class Federation {
             console.log("La federazione ha già il numero massimo di atleti.");
             return false;
         }
-        // if (athlete instanceof AmateurAthlete) {
-        //   console.log("La federazione non accetta atleti dilettanti.");
-        //   return false;
-        // }
+        if (!athlete.isIscribable()) {
+            console.log(`Atleta ${athlete.getPersonalData()} non idoneo per l'iscrizione.`);
+            return false;
+        }
         this.registeredAthletes.push(athlete);
         this.registeredAthletesCount++;
         console.log(`Atleta ${athlete.getPersonalData()} iscritto con successo.`);

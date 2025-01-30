@@ -50,6 +50,10 @@ class ProfessionalAthlete extends Athlete {
     canRegisterToFederation() {
         return true;
     }
+    // Metodo astratto per verificare se l'atleta è iscrivibile (run time)
+    isIscribable() {
+        return true;
+    }
 }
 exports.ProfessionalAthlete = ProfessionalAthlete;
 class SemiProfessionalAthlete extends Athlete {
@@ -64,6 +68,9 @@ class SemiProfessionalAthlete extends Athlete {
     canRegisterToFederation() {
         return true;
     }
+    isIscribable() {
+        return true;
+    }
 }
 exports.SemiProfessionalAthlete = SemiProfessionalAthlete;
 class AmateurAthlete extends Athlete {
@@ -73,6 +80,9 @@ class AmateurAthlete extends Athlete {
     // Il costo per un atleta dilettante è variabile tra 300 e 800
     getRegistrationCost() {
         return this.annualFee;
+    }
+    isIscribable() {
+        return false;
     }
 }
 exports.AmateurAthlete = AmateurAthlete;

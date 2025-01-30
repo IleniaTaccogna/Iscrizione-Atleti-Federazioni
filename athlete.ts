@@ -42,9 +42,10 @@ abstract class Athlete {
     getRegistrationMonth(): number {
         return this.registrationMonth;
     }
+    abstract isIscribable(): boolean;
 }
 
-// Interfaccia per gli atleti che possono iscriversi alla federazione
+// Interfaccia per gli atleti che possono iscriversi alla federazione (compile time)
 interface IFederable {
     canRegisterToFederation(): boolean;
 }
@@ -70,6 +71,11 @@ class ProfessionalAthlete extends Athlete implements IFederable {
     canRegisterToFederation(): boolean {
         return true;
     }
+
+    // Metodo astratto per verificare se l'atleta è iscrivibile (run time)
+    isIscribable(): boolean {
+        return true;
+    }
 }
 
 class SemiProfessionalAthlete extends Athlete implements IFederable {
@@ -93,6 +99,9 @@ class SemiProfessionalAthlete extends Athlete implements IFederable {
     canRegisterToFederation(): boolean {
         return true;
     }
+    isIscribable(): boolean {
+        return true;
+    }
 }
 
 class AmateurAthlete extends Athlete {
@@ -111,6 +120,10 @@ class AmateurAthlete extends Athlete {
     getRegistrationCost(): number {
         return this.annualFee;
     }
+    isIscribable(): boolean {
+        return false;
+    }
+   
 }
 
 export { Athlete, AmateurAthlete, SemiProfessionalAthlete, ProfessionalAthlete }
