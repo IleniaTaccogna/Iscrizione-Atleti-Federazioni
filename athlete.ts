@@ -42,6 +42,8 @@ abstract class Athlete {
     getRegistrationMonth(): number {
         return this.registrationMonth;
     }
+
+    // Metodo astratto per verificare se l'atleta è iscrivibile (run time)
     abstract isIscribable(): boolean;
 }
 
@@ -51,14 +53,8 @@ interface IFederable {
 }
 
 class ProfessionalAthlete extends Athlete implements IFederable {
-    constructor(
-        athleteCode: number,
-        firstName: string,
-        lastName: string,
-        birthDate: Date,
-        registrationMonth: number,
-        annualFee: number,
-    ) {
+    constructor(athleteCode: number, firstName: string, lastName: string, birthDate: Date, registrationMonth: number, annualFee: number,) 
+    {
         super(athleteCode, firstName, lastName, birthDate, registrationMonth, "Professional", annualFee);
     }
 
@@ -72,21 +68,14 @@ class ProfessionalAthlete extends Athlete implements IFederable {
         return true;
     }
 
-    // Metodo astratto per verificare se l'atleta è iscrivibile (run time)
     isIscribable(): boolean {
         return true;
     }
 }
 
 class SemiProfessionalAthlete extends Athlete implements IFederable {
-    constructor(
-        athleteCode: number,
-        firstName: string,
-        lastName: string,
-        birthDate: Date,
-        registrationMonth: number,
-        annualFee: number,
-    ) {
+    constructor(athleteCode: number, firstName: string, lastName: string, birthDate: Date, registrationMonth: number, annualFee: number) 
+    {
         super(athleteCode, firstName, lastName, birthDate, registrationMonth, "SemiProfessional", annualFee);
     }
 
@@ -105,14 +94,8 @@ class SemiProfessionalAthlete extends Athlete implements IFederable {
 }
 
 class AmateurAthlete extends Athlete {
-    constructor(
-        athleteCode: number,
-        firstName: string,
-        lastName: string,
-        birthDate: Date,
-        registrationMonth: number,
-        annualFee: number,
-    ) {
+    constructor(athleteCode: number, firstName: string, lastName: string, birthDate: Date, registrationMonth: number, annualFee: number) 
+    {
         super(athleteCode, firstName, lastName, birthDate, registrationMonth,"Amateur", annualFee);
     }
 
@@ -123,7 +106,6 @@ class AmateurAthlete extends Athlete {
     isIscribable(): boolean {
         return false;
     }
-   
 }
 
 export { Athlete, AmateurAthlete, SemiProfessionalAthlete, ProfessionalAthlete }

@@ -50,7 +50,6 @@ class ProfessionalAthlete extends Athlete {
     canRegisterToFederation() {
         return true;
     }
-    // Metodo astratto per verificare se l'atleta è iscrivibile (run time)
     isIscribable() {
         return true;
     }

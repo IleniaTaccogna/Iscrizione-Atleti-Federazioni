@@ -3,30 +3,28 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const athlete_1 = require("./athlete");
 const federation_1 = require("./federation");
 // Creazione delle federazioni
-const federation1 = new federation_1.Federation(1);
-let federation2 = new federation_1.Federation(2);
+const atletica = new federation_1.Federation(1);
+const judo = new federation_1.Federation(3);
 // Creazione degli atleti
-let athlete1 = new athlete_1.ProfessionalAthlete(101, 'Elia', 'Kenyan', new Date(1990, 0, 1), 2, 0);
-let athlete2 = new athlete_1.SemiProfessionalAthlete(102, 'Liam', 'Bianchi', new Date(1995, 5, 10), 10, 100);
-let athlete3 = new athlete_1.AmateurAthlete(103, 'Edoardo', 'Midali', new Date(2000, 7, 15), 8, 300);
-let athlete4 = new athlete_1.SemiProfessionalAthlete(104, 'Ciccio', 'Gamer89', new Date(1997, 2, 20), 3, 250);
-let athlete5 = new athlete_1.AmateurAthlete(105, 'Silvia', 'DeNicolò', new Date(2000, 7, 15), 8, 300);
-let athlete6 = new athlete_1.ProfessionalAthlete(106, 'Ilenia', 'Taccogna', new Date(1990, 0, 1), 2, 0);
-let athlete7 = new athlete_1.ProfessionalAthlete(107, 'Nicolas', 'Fortunato', new Date(1990, 0, 1), 2, 0);
+const athlete1 = new athlete_1.ProfessionalAthlete(101, 'Ilenia', 'Taccogna', new Date(2001, 8, 5), 1, 0);
+const athlete2 = new athlete_1.SemiProfessionalAthlete(102, 'Silvia', 'De Nicolò', new Date(2000, 1, 6), 10, 100);
+const athlete3 = new athlete_1.AmateurAthlete(103, 'Jambo', 'Kenyan', new Date(2015, 7, 16), 8, 300);
+const athlete4 = new athlete_1.SemiProfessionalAthlete(104, 'Leonardo', 'Galluzzi', new Date(1997, 2, 20), 3, 250);
 // Iscrizione degli atleti alle federazioni
-federation1.registerAthlete(athlete1);
-federation1.registerAthlete(athlete2);
-federation1.registerAthlete(athlete3);
-federation1.registerAthlete(athlete5);
-federation1.registerAthlete(athlete6);
-federation1.registerAthlete(athlete7);
-federation2.registerAthlete(athlete1);
-federation2.registerAthlete(athlete4);
+atletica.registerAthlete(athlete1);
+atletica.registerAthlete(athlete2);
+atletica.registerAthlete(athlete3); // Non viene iscritto
+atletica.registerAthlete(athlete4);
+judo.registerAthlete(athlete1);
+judo.registerAthlete(athlete2);
+judo.registerAthlete(athlete3); // Non viene iscritto
+judo.registerAthlete(athlete4);
+// Stampa elenco dei codici delle federazioni
+console.log('\nCodici di tutte le federazioni:', (0, federation_1.getFederationCodes)().join(', '));
 // Stampa elenco atleti della federazione 1
-console.log('Atleti della federazione 1:');
-federation1.listAthletes().forEach(athlete => {
-    console.log(`${athlete.getPersonalData()},  Mese Iscrizione: ${athlete.getRegistrationMonth()}, Costo: ${athlete.getRegistrationCost()}€`);
-});
-// Verifica se un atleta è iscritto a una federazione
-console.log('Ricerca atleta 102 in federazione 1:', federation1.listAthletes().some(athlete => athlete.getAthleteCode() === 102));
-console.log('Ricerca atleta 101 in federazione 2:', federation2.listAthletes().some(athlete => athlete.getAthleteCode() === 101));
+atletica.showAthletes();
+// Ricerca atleta per codice nelle federazioni
+atletica.findAthlete(101);
+atletica.findAthlete(102);
+judo.findAthleteByCode(103);
+judo.findAthleteByCode(104);
