@@ -44,7 +44,7 @@ abstract class Athlete {
     }
 
     // Metodo astratto per verificare se l'atleta è iscrivibile (run time)
-    abstract isIscribable(): boolean;
+    abstract isIscrivibile(): boolean;
 }
 
 // Interfaccia per gli atleti che possono iscriversi alla federazione (compile time)
@@ -68,7 +68,7 @@ class ProfessionalAthlete extends Athlete implements IFederable {
         return true;
     }
 
-    isIscribable(): boolean {
+    isIscrivibile(): boolean {
         return true;
     }
 }
@@ -88,7 +88,7 @@ class SemiProfessionalAthlete extends Athlete implements IFederable {
     canRegisterToFederation(): boolean {
         return true;
     }
-    isIscribable(): boolean {
+    isIscrivibile(): boolean {
         return true;
     }
 }
@@ -103,7 +103,7 @@ class AmateurAthlete extends Athlete {
     getRegistrationCost(): number {
         return this.annualFee;
     }
-    isIscribable(): boolean {
+    isIscrivibile(): boolean {
         return false;
     }
 }

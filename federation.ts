@@ -21,7 +21,7 @@ export class Federation<T extends ProfessionalAthlete | SemiProfessionalAthlete>
             return false;
         }
 
-        if (!athlete.isIscribable()) {
+        if (!athlete.isIscrivibile()) {
             console.log(`Atleta ${athlete.getPersonalData()} non idoneo per l'iscrizione.`);
             return false;
         }

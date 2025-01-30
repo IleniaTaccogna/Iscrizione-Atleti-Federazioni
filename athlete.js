@@ -50,7 +50,7 @@ class ProfessionalAthlete extends Athlete {
     canRegisterToFederation() {
         return true;
     }
-    isIscribable() {
+    isIscrivibile() {
         return true;
     }
 }
@@ -67,7 +67,7 @@ class SemiProfessionalAthlete extends Athlete {
     canRegisterToFederation() {
         return true;
     }
-    isIscribable() {
+    isIscrivibile() {
         return true;
     }
 }
@@ -80,7 +80,7 @@ class AmateurAthlete extends Athlete {
     getRegistrationCost() {
         return this.annualFee;
     }
-    isIscribable() {
+    isIscrivibile() {
         return false;
     }
 }

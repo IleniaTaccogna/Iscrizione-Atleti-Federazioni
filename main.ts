@@ -33,5 +33,5 @@ atletica.showAthletes();
 atletica.findAthlete(101); 
 atletica.findAthlete(102); 
 
-judo.findAthleteByCode(103); 
-judo.findAthleteByCode(104);
+judo.findAthlete(103); 
+judo.findAthlete(104);
