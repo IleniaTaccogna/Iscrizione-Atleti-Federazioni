@@ -1,6 +1,7 @@
 type AthleteType = 'Amateur' | 'SemiProfessional' | 'Professional';
 
 abstract class Athlete {
+
     lastRegistrationMonth: number = 10;
     constructor(
         protected athleteCode: number,
@@ -14,14 +15,22 @@ abstract class Athlete {
         if (this.registrationMonth < 1 || this.registrationMonth > this.lastRegistrationMonth) {
             throw new Error('Mese di iscrizione non valido(ottobre)');
         }
-        if (type === "Amateur" && (annualFee < 300 || annualFee > 800)) {
-            throw new Error('Quota annua per dilettante deve essere tra 300 e 800');
-        }
-        if (type === "SemiProfessional" && (annualFee < 100 || annualFee > 250)) {
-            throw new Error('Quota annua per semi-professionista deve essere tra 100 e 250');
-        }
-        if (type === "Professional" && annualFee !== 0) {
-            throw new Error('Quota annua per professionista deve essere zero');
+        switch (type) {
+            case "Amateur":
+                if (annualFee < 300 || annualFee > 800) {
+                    throw new Error("Quota annua per dilettante deve essere tra 300 e 800");
+                }
+                break;
+            case "SemiProfessional":
+                if (annualFee < 100 || annualFee > 250) {
+                    throw new Error(
+                        "Quota annua per semi-professionista deve essere tra 100 e 250");
+                }
+                break;
+            case "Professional":
+                if (annualFee !== 0) {
+                    throw new Error("Quota annua per professionista deve essere 0");
+                }
         }
     }
 
@@ -36,76 +45,58 @@ abstract class Athlete {
     }
 
     // Metodo astratto per ottenere il costo dell'iscrizione
-    abstract getRegistrationCost(): number;
+    getRegistrationCost(): number {
+        return this.annualFee;
+    }
 
     // Metodo per ottenere il mese di iscrizione
     getRegistrationMonth(): number {
         return this.registrationMonth;
     }
-
-    // Metodo astratto per verificare se l'atleta è iscrivibile (run time)
-    abstract isIscrivibile(): boolean;
-}
-
-// Interfaccia per gli atleti che possono iscriversi alla federazione (compile time)
-interface IFederable {
-    canRegisterToFederation(): boolean;
-}
-
-class ProfessionalAthlete extends Athlete implements IFederable {
-    constructor(athleteCode: number, firstName: string, lastName: string, birthDate: Date, registrationMonth: number, annualFee: number,) 
-    {
-        super(athleteCode, firstName, lastName, birthDate, registrationMonth, "Professional", annualFee);
-    }
-
-    // Il costo per un atleta professionista è sempre 0
-    getRegistrationCost(): number {
-        return 0;
-    }
-
-    // Implementazione dell'interfaccia per indicare che questo atleta può essere iscritto
-    canRegisterToFederation(): boolean {
-        return true;
-    }
-
-    isIscrivibile(): boolean {
-        return true;
-    }
-}
-
-class SemiProfessionalAthlete extends Athlete implements IFederable {
-    constructor(athleteCode: number, firstName: string, lastName: string, birthDate: Date, registrationMonth: number, annualFee: number) 
-    {
-        super(athleteCode, firstName, lastName, birthDate, registrationMonth, "SemiProfessional", annualFee);
-    }
-
-    // Il costo per un atleta semi-professionista è variabile tra 100 e 250
-    getRegistrationCost(): number {
-        return this.annualFee;
-    }
-
-    // Implementazione dell'interfaccia per indicare che questo atleta può essere iscritto
-    canRegisterToFederation(): boolean {
-        return true;
-    }
-    isIscrivibile(): boolean {
-        return true;
-    }
 }
 
 class AmateurAthlete extends Athlete {
-    constructor(athleteCode: number, firstName: string, lastName: string, birthDate: Date, registrationMonth: number, annualFee: number) 
-    {
-        super(athleteCode, firstName, lastName, birthDate, registrationMonth,"Amateur", annualFee);
-    }
-
-    // Il costo per un atleta dilettante è variabile tra 300 e 800
-    getRegistrationCost(): number {
-        return this.annualFee;
-    }
-    isIscrivibile(): boolean {
-        return false;
+    constructor(
+        athleteCode: number,
+        firstName: string,
+        lastName: string,
+        birthDate: Date,
+        registrationMonth: number,
+        annualFee: number
+    ) {
+        super(athleteCode, firstName, lastName, birthDate, registrationMonth, "Amateur", annualFee);
     }
 }
 
-export { Athlete, AmateurAthlete, SemiProfessionalAthlete, ProfessionalAthlete }
+ class FederableAthlete extends Athlete {
+    isIscrivibile: boolean = true;
+}
+
+class SemiProfessionalAthlete extends FederableAthlete {
+    constructor(
+        athleteCode: number,
+        firstName: string,
+        lastName: string,
+        birthDate: Date,
+        registrationMonth: number,
+        annualFee: number
+    ) {
+        super(athleteCode, firstName, lastName, birthDate, registrationMonth, "SemiProfessional", annualFee);
+    }
+}
+
+class ProfessionalAthlete extends FederableAthlete {
+    constructor(
+        athleteCode: number,
+        firstName: string,
+        lastName: string,
+        birthDate: Date,
+        registrationMonth: number,
+        annualFee: number
+    ) {
+        super(athleteCode, firstName, lastName, birthDate, registrationMonth, "Professional", annualFee);
+    }
+}
+
+
+export { AmateurAthlete, SemiProfessionalAthlete, ProfessionalAthlete }

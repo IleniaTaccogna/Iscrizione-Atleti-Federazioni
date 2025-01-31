@@ -4,31 +4,32 @@ const federations: Federation<any>[] = [];
 
 export class Federation<T extends ProfessionalAthlete | SemiProfessionalAthlete> {
     federationCode: number;
-    protected registeredAthletesCount: number;
     protected registeredAthletes: T[];
 
     constructor(federationCode: number) {
         this.federationCode = federationCode;
-        this.registeredAthletesCount = 0;
         this.registeredAthletes = [];
         federations.push(this);
     }
 
+    getRegisteredAthletesCount(): number {
+        return this.registeredAthletes.length
+    }
+
     // Iscrizione di un atleta alla federazione
-    registerAthlete(athlete: T): boolean {
-        if (this.registeredAthletesCount >= 3) {
-            console.log("La federazione ha già il numero massimo di atleti.");
-            return false;
+    registerAthlete(athlete: T): void {
+        if (this.getRegisteredAthletesCount() >= 3) {
+            console.error("La federazione ha già il numero massimo di atleti.");
+            return;
         }
 
-        if (!athlete.isIscrivibile()) {
-            console.log(`Atleta ${athlete.getPersonalData()} non idoneo per l'iscrizione.`);
-            return false;
+        if (!athlete.isIscrivibile) {
+            console.error(`Atleta ${athlete.getPersonalData()} non idoneo per l'iscrizione.`);
+            return;
         }
         this.registeredAthletes.push(athlete);
-        this.registeredAthletesCount++;
         console.log(`Atleta ${athlete.getPersonalData()} iscritto con successo.`);
-        return true;
+        return;
     }
 
     // Rimozione di un atleta dalla federazione
@@ -36,10 +37,9 @@ export class Federation<T extends ProfessionalAthlete | SemiProfessionalAthlete>
         const index = this.registeredAthletes.findIndex(a => a.getAthleteCode() === athlete.getAthleteCode());
         if (index !== -1) {
             this.registeredAthletes.splice(index, 1);
-            this.registeredAthletesCount--;
             console.log(`\nAtleta ${athlete.getPersonalData()} rimosso.`);
         } else {
-            console.log("\nAtleta non trovato.");
+            console.error("\nAtleta non trovato.");
         }
     }
 
@@ -61,11 +61,11 @@ export class Federation<T extends ProfessionalAthlete | SemiProfessionalAthlete>
             console.log(`\nAtleta trovato nella federazione ${this.federationCode}:`);
             console.log(`${athlete.getPersonalData()}, Mese Iscrizione: ${athlete.getRegistrationMonth()}, Costo: ${athlete.getRegistrationCost()}€`);
         } else {
-            console.log(`\nAtleta con codice ${athleteCode} non trovato nella federazione ${this.federationCode}.`);
+            console.error(`\nAtleta con codice ${athleteCode} non trovato nella federazione ${this.federationCode}.`);
         }
     }
 }
 
-export function getFederationCodes(): number[] {   //static ci serve perchè altrimenti dovremmo richiamare il metodo su una instanza e non più globalmente
+export function getFederationCodes(): number[] {
     return federations.map(federation => federation.federationCode);
 }

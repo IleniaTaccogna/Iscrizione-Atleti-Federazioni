@@ -6,35 +6,35 @@ const federations = [];
 class Federation {
     constructor(federationCode) {
         this.federationCode = federationCode;
-        this.registeredAthletesCount = 0;
         this.registeredAthletes = [];
         federations.push(this);
     }
+    getRegisteredAthletesCount() {
+        return this.registeredAthletes.length;
+    }
     // Iscrizione di un atleta alla federazione
     registerAthlete(athlete) {
-        if (this.registeredAthletesCount >= 3) {
-            console.log("La federazione ha già il numero massimo di atleti.");
-            return false;
+        if (this.getRegisteredAthletesCount() >= 3) {
+            console.error("La federazione ha già il numero massimo di atleti.");
+            return;
         }
-        if (!athlete.isIscrivibile()) {
-            console.log(`Atleta ${athlete.getPersonalData()} non idoneo per l'iscrizione.`);
-            return false;
+        if (!athlete.isIscrivibile) {
+            console.error(`Atleta ${athlete.getPersonalData()} non idoneo per l'iscrizione.`);
+            return;
         }
         this.registeredAthletes.push(athlete);
-        this.registeredAthletesCount++;
         console.log(`Atleta ${athlete.getPersonalData()} iscritto con successo.`);
-        return true;
+        return;
     }
     // Rimozione di un atleta dalla federazione
     removeAthlete(athlete) {
         const index = this.registeredAthletes.findIndex(a => a.getAthleteCode() === athlete.getAthleteCode());
         if (index !== -1) {
             this.registeredAthletes.splice(index, 1);
-            this.registeredAthletesCount--;
             console.log(`\nAtleta ${athlete.getPersonalData()} rimosso.`);
         }
         else {
-            console.log("\nAtleta non trovato.");
+            console.error("\nAtleta non trovato.");
         }
     }
     // Elenco degli atleti iscritti, ordinato per mese di iscrizione
@@ -55,7 +55,7 @@ class Federation {
             console.log(`${athlete.getPersonalData()}, Mese Iscrizione: ${athlete.getRegistrationMonth()}, Costo: ${athlete.getRegistrationCost()}€`);
         }
         else {
-            console.log(`\nAtleta con codice ${athleteCode} non trovato nella federazione ${this.federationCode}.`);
+            console.error(`\nAtleta con codice ${athleteCode} non trovato nella federazione ${this.federationCode}.`);
         }
     }
 }

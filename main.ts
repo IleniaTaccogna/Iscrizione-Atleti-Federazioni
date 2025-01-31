@@ -10,12 +10,13 @@ const athlete1 = new ProfessionalAthlete(101, 'Ilenia', 'Taccogna', new Date(200
 const athlete2 = new SemiProfessionalAthlete(102, 'Silvia', 'De Nicolò', new Date(2000, 1, 6), 10, 100);  
 const athlete3 = new AmateurAthlete(103, 'Jambo', 'Kenyan', new Date(2015, 7, 16), 8, 300);  
 const athlete4 = new SemiProfessionalAthlete(104, 'Leonardo', 'Galluzzi', new Date(1997, 2, 20), 3, 250);  
-
+const athlete5 = new SemiProfessionalAthlete(104, 'Leonardo', 'Galluzzi', new Date(1997, 2, 20), 3, 250);
 // Iscrizione degli atleti alle federazioni
 atletica.registerAthlete(athlete1);  
 atletica.registerAthlete(athlete2);  
 atletica.registerAthlete(athlete3);  // Non viene iscritto
 atletica.registerAthlete(athlete4);  
+atletica.registerAthlete(athlete5); 
 
 judo.registerAthlete(athlete1);  
 judo.registerAthlete(athlete2);
