@@ -9,6 +9,7 @@ class Federation {
         this.registeredAthletes = [];
         federations.push(this);
     }
+    // Restituisce la lunghezza dell'array
     getRegisteredAthletesCount() {
         return this.registeredAthletes.length;
     }

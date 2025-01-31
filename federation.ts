@@ -11,7 +11,8 @@ export class Federation<T extends ProfessionalAthlete | SemiProfessionalAthlete>
         this.registeredAthletes = [];
         federations.push(this);
     }
-
+    
+    // Restituisce la lunghezza dell'array
     getRegisteredAthletesCount(): number {
         return this.registeredAthletes.length
     }

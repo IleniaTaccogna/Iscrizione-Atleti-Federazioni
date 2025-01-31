@@ -39,7 +39,7 @@ class Athlete {
     getPersonalData() {
         return `${this.firstName} ${this.lastName}, Nato il ${this.birthDate.toLocaleDateString()}`;
     }
-    // Metodo astratto per ottenere il costo dell'iscrizione
+    // Metodo per ottenere il costo dell'iscrizione
     getRegistrationCost() {
         return this.annualFee;
     }
