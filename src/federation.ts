@@ -1,47 +1,55 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.Federation = void 0;
-exports.getFederationCodes = getFederationCodes;
-const federations = [];
-class Federation {
-    constructor(federationCode) {
+import { ProfessionalAthlete, SemiProfessionalAthlete } from "./athlete";
+
+type FederableAthlete = ProfessionalAthlete | SemiProfessionalAthlete
+const federations: Federation<FederableAthlete>[] = [];
+
+export class Federation<TAthlete extends FederableAthlete> {
+    federationCode: number;
+    protected registeredAthletes: TAthlete[];
+
+    constructor(federationCode: number) {
         this.federationCode = federationCode;
         this.registeredAthletes = [];
         federations.push(this);
     }
+
     // Restituisce la lunghezza dell'array
-    getRegisteredAthletesCount() {
-        return this.registeredAthletes.length;
+    getRegisteredAthletesCount(): number {
+        return this.registeredAthletes.length
     }
+
     // Iscrizione di un atleta alla federazione
-    registerAthlete(athlete) {
+    registerAthlete(athlete: TAthlete): void {
         if (this.getRegisteredAthletesCount() >= 3) {
             console.error("La federazione ha già il numero massimo di atleti.");
             return;
         }
-        if (!athlete.isIscrivibile) {
-            console.error(`Atleta ${athlete.getPersonalData()} non idoneo per l'iscrizione.`);
-            return;
-        }
+
+        // if (!athlete.isIscrivibile) {
+        //     console.error(`Atleta ${athlete.getPersonalData()} non idoneo per l'iscrizione.`);
+        //     return;
+        // }
         this.registeredAthletes.push(athlete);
         console.log(`Atleta ${athlete.getPersonalData()} iscritto con successo.`);
         return;
     }
+
     // Rimozione di un atleta dalla federazione
-    removeAthlete(athlete) {
+    removeAthlete(athlete: TAthlete): void {
         const index = this.registeredAthletes.findIndex(a => a.getAthleteCode() === athlete.getAthleteCode());
         if (index !== -1) {
             this.registeredAthletes.splice(index, 1);
             console.log(`\nAtleta ${athlete.getPersonalData()} rimosso.`);
-        }
-        else {
+        } else {
             console.error("\nAtleta non trovato.");
         }
     }
+
     // Elenco degli atleti iscritti, ordinato per mese di iscrizione
-    showAthletes() {
+    showAthletes(): void {
         // Ordina gli atleti per mese di iscrizione
         const sortedAthletes = this.registeredAthletes.sort((a, b) => a.getRegistrationMonth() - b.getRegistrationMonth());
+
         // Stampa i dettagli di ogni atleta
         console.log(`\nAtleti iscritti alla federazione ${this.federationCode}:`);
         sortedAthletes.forEach(athlete => {
@@ -49,18 +57,18 @@ class Federation {
         });
     }
     // Ricerca di un atleta per codice e stampa dei risultati
-    findAthlete(athleteCode) {
+    findAthlete(athleteCode: number): void {
         const athlete = this.registeredAthletes.find(a => a.getAthleteCode() === athleteCode);
         if (athlete) {
             console.log(`\nAtleta trovato nella federazione ${this.federationCode}:`);
             console.log(`${athlete.getPersonalData()}, Mese Iscrizione: ${athlete.getRegistrationMonth()}, Costo: ${athlete.getRegistrationCost()}€`);
-        }
-        else {
+        } else {
             console.error(`\nAtleta con codice ${athleteCode} non trovato nella federazione ${this.federationCode}.`);
         }
     }
 }
-exports.Federation = Federation;
-function getFederationCodes() {
+
+// Metodo per ottenere i codici delle federazioni   
+export function getFederationCodes(): number[] {
     return federations.map(federation => federation.federationCode);
 }
