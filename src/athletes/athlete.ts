@@ -39,7 +39,6 @@ export abstract class Athlete {
         return this.registrationMonth;
 
     }
-
 }
 
 // Interfaccia per l'atleta iscrivibile

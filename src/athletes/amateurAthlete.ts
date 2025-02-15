@@ -4,5 +4,4 @@ import { Athlete, AthleteTypeDecorator } from './athlete';
 @AthleteTypeDecorator('Amateur')
 export class AmateurAthlete extends Athlete {
     static registrationCostRange = { min: 300, max: 500 };
-
 }

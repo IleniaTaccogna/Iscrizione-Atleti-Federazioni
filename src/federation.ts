@@ -3,11 +3,10 @@ import { ProfessionalAthlete } from "./athletes/professionalAthlete";
 import { SemiProfessionalAthlete } from "./athletes/semiProfessionalAthlete";
 
 
-
 type FederableAthlete = ProfessionalAthlete | SemiProfessionalAthlete
 const federations: Federation<FederableAthlete>[] = [];
 
-export class Federation<TAthlete extends FederableAthlete> {
+export class Federation<TAthlete extends FederableAthlete = FederableAthlete> {
     federationCode: number;
     protected registeredAthletes: TAthlete[];
 
@@ -43,7 +42,6 @@ export class Federation<TAthlete extends FederableAthlete> {
             console.error(`Atleta ${athlete.getPersonalData()} non idoneo per l'iscrizione.`);
             return;
         }
-
        
         this.registeredAthletes.push(athlete);
         console.log(`Atleta ${athlete.getPersonalData()} iscritto con successo.`);
