@@ -1,4 +1,6 @@
-import { ProfessionalAthlete, SemiProfessionalAthlete, AmateurAthlete } from './athlete';
+import { ProfessionalAthlete } from './athletes/professionalAthlete';
+import { SemiProfessionalAthlete } from './athletes/semiProfessionalAthlete';
+import { AmateurAthlete } from './athletes/amateurAthlete';
 import { Federation, getFederationCodes } from './federation';
 
 // Creazione delle federazioni

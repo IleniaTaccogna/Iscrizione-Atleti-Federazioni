@@ -1,4 +1,8 @@
-import { ProfessionalAthlete, SemiProfessionalAthlete, Athlete} from "./athlete";
+import { Athlete} from "./athletes/athlete";
+import { ProfessionalAthlete } from "./athletes/professionalAthlete";
+import { SemiProfessionalAthlete } from "./athletes/semiProfessionalAthlete";
+
+
 
 type FederableAthlete = ProfessionalAthlete | SemiProfessionalAthlete
 const federations: Federation<FederableAthlete>[] = [];
