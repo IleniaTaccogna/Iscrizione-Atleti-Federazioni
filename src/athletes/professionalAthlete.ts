@@ -1,9 +1,9 @@
-import { Athlete, AthleteTypeDecorator, IFederable } from './athlete';
+import { Athlete } from './athlete';
 
-// Sottoclasse per l'atleta professionista 
-@AthleteTypeDecorator('Professional')
-export class ProfessionalAthlete extends Athlete implements IFederable {
-    isIscrivibile = true;
+export class ProfessionalAthlete extends Athlete {
+
+    isIscrivibile: boolean = true;
+
     static registrationCostRange = { min: 0, max: 0 };
 }
 

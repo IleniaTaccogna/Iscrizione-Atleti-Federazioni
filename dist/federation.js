@@ -19,14 +19,14 @@ class Federation {
             console.error("La federazione ha già il numero massimo di atleti.");
             return;
         }
+        if (!athlete.isIscrivibile) {
+            console.error(`Atleta ${athlete.getPersonalData()} non idoneo per l'iscrizione.`);
+            return;
+        }
         const athleteType = athlete.constructor; // Ottieni il costruttore dell'atleta (class)
         const { min, max } = athleteType.registrationCostRange; // Ottieni il range di iscrizione per il tipo
         if (athlete.getRegistrationCost() < min || athlete.getRegistrationCost() > max) {
             console.error(`Atleta ${athlete.getPersonalData()} non idoneo per l'iscrizione. La quota annua deve essere tra ${min}€ e ${max}€`);
-            return;
-        }
-        if (!athlete.isIscrivibile) {
-            console.error(`Atleta ${athlete.getPersonalData()} non idoneo per l'iscrizione.`);
             return;
         }
         this.registeredAthletes.push(athlete);

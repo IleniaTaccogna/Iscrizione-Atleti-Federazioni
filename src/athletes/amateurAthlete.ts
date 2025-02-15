@@ -1,7 +1,8 @@
-import { Athlete, AthleteTypeDecorator } from './athlete';
+import { Athlete } from './athlete';
 
-// Sottoclasse per l'atleta amatore 
-@AthleteTypeDecorator('Amateur')
 export class AmateurAthlete extends Athlete {
+
+    // isIscrivibile: boolean = false;
+
     static registrationCostRange = { min: 300, max: 500 };
 }

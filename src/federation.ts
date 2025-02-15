@@ -1,9 +1,11 @@
-import { Athlete} from "./athletes/athlete";
+// Importa le classi degli atleti
+import { Athlete } from "./athletes/athlete";
 import { ProfessionalAthlete } from "./athletes/professionalAthlete";
 import { SemiProfessionalAthlete } from "./athletes/semiProfessionalAthlete";
 
 
-type FederableAthlete = ProfessionalAthlete | SemiProfessionalAthlete
+type FederableAthlete = ProfessionalAthlete | SemiProfessionalAthlete;
+
 const federations: Federation<FederableAthlete>[] = [];
 
 export class Federation<TAthlete extends FederableAthlete = FederableAthlete> {
@@ -28,6 +30,10 @@ export class Federation<TAthlete extends FederableAthlete = FederableAthlete> {
             return;
         }
 
+        if (!athlete.isIscrivibile) {
+            console.error(`Atleta ${athlete.getPersonalData()} non idoneo per l'iscrizione.`);
+            return;
+        }
 
         const athleteType = athlete.constructor as typeof Athlete; // Ottieni il costruttore dell'atleta (class)
         const { min, max } = athleteType.registrationCostRange; // Ottieni il range di iscrizione per il tipo
@@ -37,12 +43,7 @@ export class Federation<TAthlete extends FederableAthlete = FederableAthlete> {
             return;
         }
 
-      
-        if (!athlete.isIscrivibile) {
-            console.error(`Atleta ${athlete.getPersonalData()} non idoneo per l'iscrizione.`);
-            return;
-        }
-       
+
         this.registeredAthletes.push(athlete);
         console.log(`Atleta ${athlete.getPersonalData()} iscritto con successo.`);
         return;

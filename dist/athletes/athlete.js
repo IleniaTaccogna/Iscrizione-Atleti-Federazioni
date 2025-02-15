@@ -1,19 +1,17 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Athlete = void 0;
-exports.AthleteTypeDecorator = AthleteTypeDecorator;
+const lastRegistrationMonth = 10;
 class Athlete {
-    constructor(athleteCode, firstName, lastName, birthDate, registrationMonth, type, annualFee) {
+    constructor(athleteCode, firstName, lastName, birthDate, registrationMonth, annualFee) {
         this.athleteCode = athleteCode;
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthDate = birthDate;
         this.registrationMonth = registrationMonth;
-        this.type = type;
         this.annualFee = annualFee;
-        this.lastRegistrationMonth = 10;
-        if (this.registrationMonth < 1 || this.registrationMonth > this.lastRegistrationMonth) {
-            throw new Error('Mese di iscrizione non valido (ottobre)');
+        if (this.registrationMonth < 1 || this.registrationMonth > lastRegistrationMonth) {
+            throw new Error(`Mese di iscrizione non valido. Ultimo mese di iscrizione: ${lastRegistrationMonth}`);
         }
     }
     // Metodo per ottenere il codice dell'atleta
@@ -34,9 +32,5 @@ class Athlete {
     }
 }
 exports.Athlete = Athlete;
-// Decoratore per assegnare il tipo di atleta
-function AthleteTypeDecorator(type) {
-    return function (target) {
-        target.prototype.type = type;
-    };
-}
+// Interfaccia per l'atleta iscrivibile
+//let isIscrivibile: boolean;

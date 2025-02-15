@@ -1,9 +1,8 @@
-type AthleteType = 'Amateur' | 'SemiProfessional' | 'Professional';
+
+const lastRegistrationMonth: number = 10;
 
 export abstract class Athlete {
-    lastRegistrationMonth: number = 10;
     static registrationCostRange: { min: number, max: number };
-
 
     constructor(
         protected athleteCode: number,
@@ -11,11 +10,10 @@ export abstract class Athlete {
         protected lastName: string,
         protected birthDate: Date,
         protected registrationMonth: number,
-        public type: AthleteType,
         protected annualFee: number,
     ) {
-        if (this.registrationMonth < 1 || this.registrationMonth > this.lastRegistrationMonth) {
-            throw new Error('Mese di iscrizione non valido (ottobre)');
+        if (this.registrationMonth < 1 || this.registrationMonth > lastRegistrationMonth) {
+            throw new Error(`Mese di iscrizione non valido. Ultimo mese di iscrizione: ${lastRegistrationMonth}`);
         }
     }
 
@@ -41,22 +39,7 @@ export abstract class Athlete {
     }
 }
 
+
 // Interfaccia per l'atleta iscrivibile
-export interface IFederable {
-    isIscrivibile: boolean;
-}
 
-
-// Decoratore per assegnare il tipo di atleta
-export function AthleteTypeDecorator(type: AthleteType) {
-    return function (target: any) {
-        target.prototype.type = type;
-    };
-}
-
-
-
-
-
-
-
+//let isIscrivibile: boolean;
