@@ -38,7 +38,7 @@ var __setFunctionName = (this && this.__setFunctionName) || function (f, name, p
     return Object.defineProperty(f, "name", { configurable: true, value: prefix ? "".concat(prefix, " ", name) : name });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ProfessionalAthlete = exports.SemiProfessionalAthlete = exports.AmateurAthlete = void 0;
+exports.ProfessionalAthlete = exports.SemiProfessionalAthlete = exports.AmateurAthlete = exports.Athlete = void 0;
 class Athlete {
     constructor(athleteCode, firstName, lastName, birthDate, registrationMonth, type, annualFee) {
         this.athleteCode = athleteCode;
@@ -70,31 +70,11 @@ class Athlete {
         return this.registrationMonth;
     }
 }
-// Decoratore per assegnare il tipo di atleta e validare la quota annuale
+exports.Athlete = Athlete;
+// Decoratore per assegnare il tipo di atleta
 function AthleteTypeDecorator(type) {
     return function (target) {
-        // Modifica direttamente la classe target
         target.prototype.type = type;
-        // Aggiungiamo la logica di validazione della quota annuale
-        const originalConstructor = target;
-        target = class extends originalConstructor {
-            constructor(...args) {
-                super(...args);
-                // Validazione annual fee per "Amateur"
-                if (type === 'Amateur' && args[5] < 300 || args[5] > 800) {
-                    throw new Error("Quota annua per dilettante deve essere tra 300 e 800");
-                }
-                // Validazione annual fee per "SemiProfessional"
-                if (type === 'SemiProfessional' && (args[5] < 100 || args[5] > 250)) {
-                    throw new Error("Quota annua per semi-professionista deve essere tra 100 e 250");
-                }
-                // Validazione annual fee per "Professional"
-                if (type === 'Professional' && args[5] !== 0) {
-                    throw new Error("Quota annua per professionista deve essere 0");
-                }
-            }
-        };
-        return target;
     };
 }
 // Sottoclasse per l'atleta amatore (non serve scrivere costruttore)
@@ -113,6 +93,9 @@ let AmateurAthlete = (() => {
         __esDecorate(null, _classDescriptor = { value: _classThis }, _classDecorators, { kind: "class", name: _classThis.name, metadata: _metadata }, null, _classExtraInitializers);
         AmateurAthlete = _classThis = _classDescriptor.value;
         if (_metadata) Object.defineProperty(_classThis, Symbol.metadata, { enumerable: true, configurable: true, writable: true, value: _metadata });
+    })();
+    _classThis.registrationCostRange = { min: 300, max: 500 };
+    (() => {
         __runInitializers(_classThis, _classExtraInitializers);
     })();
     return AmateurAthlete = _classThis;
@@ -126,6 +109,10 @@ let SemiProfessionalAthlete = (() => {
     let _classThis;
     let _classSuper = Athlete;
     var SemiProfessionalAthlete = _classThis = class extends _classSuper {
+        constructor() {
+            super(...arguments);
+            this.isIscrivibile = true;
+        }
     };
     __setFunctionName(_classThis, "SemiProfessionalAthlete");
     (() => {
@@ -134,6 +121,9 @@ let SemiProfessionalAthlete = (() => {
         __esDecorate(null, _classDescriptor = { value: _classThis }, _classDecorators, { kind: "class", name: _classThis.name, metadata: _metadata }, null, _classExtraInitializers);
         SemiProfessionalAthlete = _classThis = _classDescriptor.value;
         if (_metadata) Object.defineProperty(_classThis, Symbol.metadata, { enumerable: true, configurable: true, writable: true, value: _metadata });
+    })();
+    _classThis.registrationCostRange = { min: 100, max: 250 };
+    (() => {
         __runInitializers(_classThis, _classExtraInitializers);
     })();
     return SemiProfessionalAthlete = _classThis;
@@ -147,6 +137,10 @@ let ProfessionalAthlete = (() => {
     let _classThis;
     let _classSuper = Athlete;
     var ProfessionalAthlete = _classThis = class extends _classSuper {
+        constructor() {
+            super(...arguments);
+            this.isIscrivibile = true;
+        }
     };
     __setFunctionName(_classThis, "ProfessionalAthlete");
     (() => {
@@ -155,6 +149,9 @@ let ProfessionalAthlete = (() => {
         __esDecorate(null, _classDescriptor = { value: _classThis }, _classDecorators, { kind: "class", name: _classThis.name, metadata: _metadata }, null, _classExtraInitializers);
         ProfessionalAthlete = _classThis = _classDescriptor.value;
         if (_metadata) Object.defineProperty(_classThis, Symbol.metadata, { enumerable: true, configurable: true, writable: true, value: _metadata });
+    })();
+    _classThis.registrationCostRange = { min: 0, max: 0 };
+    (() => {
         __runInitializers(_classThis, _classExtraInitializers);
     })();
     return ProfessionalAthlete = _classThis;
