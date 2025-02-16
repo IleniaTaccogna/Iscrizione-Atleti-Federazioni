@@ -1,8 +1,13 @@
+export type AthleteType =
+    | {type: "professional"; registrationCostRange: {min:number, max: number} }
+    | { type: "semiprofessional" ; registrationCostRange: {min:number, max: number} }
+    | { type: "amateur" ; registrationCostRange: {min:number, max: number} };
 
 const lastRegistrationMonth: number = 10;
 
 export abstract class Athlete {
-    static registrationCostRange: { min: number, max: number };
+
+    protected abstract readonly athleteType: AthleteType;
 
     constructor(
         protected athleteCode: number,
@@ -38,8 +43,3 @@ export abstract class Athlete {
 
     }
 }
-
-
-// Interfaccia per l'atleta iscrivibile
-
-//let isIscrivibile: boolean;

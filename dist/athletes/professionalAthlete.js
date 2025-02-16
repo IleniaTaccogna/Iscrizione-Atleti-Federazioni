@@ -5,8 +5,7 @@ const athlete_1 = require("./athlete");
 class ProfessionalAthlete extends athlete_1.Athlete {
     constructor() {
         super(...arguments);
-        this.isIscrivibile = true;
+        this.athleteType = { type: "professional", registrationCostRange: { min: 0, max: 0 } };
     }
 }
 exports.ProfessionalAthlete = ProfessionalAthlete;
-ProfessionalAthlete.registrationCostRange = { min: 0, max: 0 };

@@ -32,5 +32,3 @@ class Athlete {
     }
 }
 exports.Athlete = Athlete;
-// Interfaccia per l'atleta iscrivibile
-//let isIscrivibile: boolean;
