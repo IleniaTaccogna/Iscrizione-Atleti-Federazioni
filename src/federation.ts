@@ -1,4 +1,4 @@
-// Importa le classi degli atleti
+import {  Athlete} from "./athletes/athlete";
 import { ProfessionalAthlete } from "./athletes/professionalAthlete";
 import { SemiProfessionalAthlete } from "./athletes/semiProfessionalAthlete";
 
@@ -22,24 +22,23 @@ export class Federation<TAthlete extends FederableAthlete = FederableAthlete> {
     }
 
     // Iscrizione di un atleta alla federazione
+    @ValidateAthleteType
     registerAthlete(athlete: TAthlete): void {
-        if (this.getRegisteredAthletesCount() >= 3) {
-            console.error("La federazione ha già il numero massimo di atleti.");
-            return;
-        }
-
         const { min, max } = athlete.athleteType.registrationCostRange;
-
+        if (this.getRegisteredAthletesCount() >= 3) {
+                    console.error("La federazione ha già il numero massimo di atleti.");
+                    return;
+                }
+                
         if (athlete.getRegistrationCost() < min || athlete.getRegistrationCost() > max) {
-            console.error(`Atleta ${athlete.getPersonalData()} non idoneo per l'iscrizione. La quota annua deve essere tra ${min}€ e ${max}€`);
+            console.error(` Atleta ${athlete.getPersonalData()} non idoneo per l'iscrizione. La quota annua deve essere tra ${min}€ e ${max}€`);
             return;
         }
-
-
+    
         this.registeredAthletes.push(athlete);
-        console.log(`Atleta ${athlete.getPersonalData()} iscritto con successo.`);
-        return;
+        console.log(` Atleta ${athlete.getPersonalData()} iscritto con successo.`);
     }
+
 
     // Rimozione di un atleta dalla federazione
     removeAthlete(athlete: TAthlete): void {
@@ -79,3 +78,27 @@ export class Federation<TAthlete extends FederableAthlete = FederableAthlete> {
 export function getFederationCodes(): number[] {
     return federations.map(federation => federation.federationCode);
 }
+
+// Decoratore per validare il tipo dell'atleta
+export function ValidateAthleteType(target: any, propertyKey: string, descriptor: PropertyDescriptor) {
+    const originalMethod = descriptor.value;
+    
+    descriptor.value = function (athlete: Athlete) {
+        if (athlete.athleteType.type === "amateur") {
+            // throw new Error(`Gli atleti di tipo "Amateur" non possono iscriversi a una federazione.`);
+            console.log(`Gli atleti di tipo "Amateur" non possono iscriversi a una federazione.`);
+            return false;
+            
+        }
+        // Chiamata al metodo originale se il tipo dell'atleta è valido
+        return originalMethod.apply(this, [athlete]);
+    };
+
+    return descriptor;
+}
+
+
+
+
+
+

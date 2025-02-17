@@ -6,8 +6,7 @@ export type AthleteType =
 const lastRegistrationMonth: number = 10;
 
 export abstract class Athlete {
-
-    protected abstract readonly athleteType: AthleteType;
+abstract readonly athleteType: AthleteType;
 
     constructor(
         protected athleteCode: number,
@@ -43,3 +42,4 @@ export abstract class Athlete {
 
     }
 }
+

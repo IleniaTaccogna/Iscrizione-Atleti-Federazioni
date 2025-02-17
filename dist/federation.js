@@ -1,7 +1,17 @@
 "use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Federation = void 0;
 exports.getFederationCodes = getFederationCodes;
+exports.ValidateAthleteType = ValidateAthleteType;
 const federations = [];
 class Federation {
     constructor(federationCode) {
@@ -15,18 +25,17 @@ class Federation {
     }
     // Iscrizione di un atleta alla federazione
     registerAthlete(athlete) {
+        const { min, max } = athlete.athleteType.registrationCostRange;
         if (this.getRegisteredAthletesCount() >= 3) {
             console.error("La federazione ha già il numero massimo di atleti.");
             return;
         }
-        const { min, max } = athlete.athleteType.registrationCostRange;
         if (athlete.getRegistrationCost() < min || athlete.getRegistrationCost() > max) {
-            console.error(`Atleta ${athlete.getPersonalData()} non idoneo per l'iscrizione. La quota annua deve essere tra ${min}€ e ${max}€`);
+            console.error(` Atleta ${athlete.getPersonalData()} non idoneo per l'iscrizione. La quota annua deve essere tra ${min}€ e ${max}€`);
             return;
         }
         this.registeredAthletes.push(athlete);
-        console.log(`Atleta ${athlete.getPersonalData()} iscritto con successo.`);
-        return;
+        console.log(` Atleta ${athlete.getPersonalData()} iscritto con successo.`);
     }
     // Rimozione di un atleta dalla federazione
     removeAthlete(athlete) {
@@ -62,7 +71,27 @@ class Federation {
     }
 }
 exports.Federation = Federation;
+__decorate([
+    ValidateAthleteType,
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", void 0)
+], Federation.prototype, "registerAthlete", null);
 // Metodo per ottenere i codici delle federazioni   
 function getFederationCodes() {
     return federations.map(federation => federation.federationCode);
+}
+// Decoratore per validare il tipo dell'atleta
+function ValidateAthleteType(target, propertyKey, descriptor) {
+    const originalMethod = descriptor.value;
+    descriptor.value = function (athlete) {
+        if (athlete.athleteType.type === "amateur") {
+            // throw new Error(`Gli atleti di tipo "Amateur" non possono iscriversi a una federazione.`);
+            console.log(`Gli atleti di tipo "Amateur" non possono iscriversi a una federazione.`);
+            return false;
+        }
+        // Chiamata al metodo originale se il tipo dell'atleta è valido
+        return originalMethod.apply(this, [athlete]);
+    };
+    return descriptor;
 }
