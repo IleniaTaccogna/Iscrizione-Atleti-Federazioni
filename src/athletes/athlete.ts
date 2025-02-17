@@ -1,7 +1,7 @@
 export type AthleteType =
-    | {type: "professional"; registrationCostRange: {min:number, max: number} }
-    | { type: "semiprofessional" ; registrationCostRange: {min:number, max: number} }
-    | { type: "amateur" ; registrationCostRange: {min:number, max: number} };
+    | {type: "professional"; registrationCostRange: {min:number, max: number}, isIscrivible:boolean}
+    | { type: "semiprofessional" ; registrationCostRange: {min:number, max: number}, isIscrivible:boolean}
+    | { type: "amateur" ; registrationCostRange: {min:number, max: number}, isIscrivible:boolean};
 
 const lastRegistrationMonth: number = 10;
 

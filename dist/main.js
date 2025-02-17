@@ -13,7 +13,7 @@ const athlete1 = new professionalAthlete_1.ProfessionalAthlete(101, 'Ilenia', 'T
 const athlete2 = new semiProfessionalAthlete_1.SemiProfessionalAthlete(102, 'Silvia', 'De Nicolò', new Date(2000, 1, 6), 10, 100);
 const athlete3 = new amateurAthlete_1.AmateurAthlete(103, 'Jambo', 'Kenyan', new Date(2015, 7, 16), 8, 300);
 const athlete4 = new semiProfessionalAthlete_1.SemiProfessionalAthlete(104, 'Leonardo', 'Galluzzi', new Date(1997, 2, 20), 3, 250);
-const athlete5 = new amateurAthlete_1.AmateurAthlete(105, 'JMaria', 'DeFilippi', new Date(1967, 7, 16), 8, 300);
+const athlete5 = new amateurAthlete_1.AmateurAthlete(105, 'Maria', 'DeFilippi', new Date(1967, 7, 16), 8, 300);
 // Iscrizione degli atleti alle federazioni
 atletica.registerAthlete(athlete1);
 atletica.registerAthlete(athlete2);

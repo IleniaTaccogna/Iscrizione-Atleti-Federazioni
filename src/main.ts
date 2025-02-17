@@ -11,11 +11,11 @@ const tennis=new Federation(2);
 
 
 // Creazione degli atleti
-const athlete1 = new ProfessionalAthlete(101, 'Ilenia', 'Taccogna', new Date(2001, 8, 5), 1, 0);
+const athlete1 = new ProfessionalAthlete(101, 'Ilenia', 'Taccogna', new Date(2001, 8, 5), 1, 0) ;
 const athlete2 = new SemiProfessionalAthlete(102, 'Silvia', 'De Nicolò', new Date(2000, 1, 6), 10, 100);
 const athlete3 = new AmateurAthlete(103, 'Jambo', 'Kenyan', new Date(2015, 7, 16), 8, 300);
 const athlete4 = new SemiProfessionalAthlete(104, 'Leonardo', 'Galluzzi', new Date(1997, 2, 20), 3, 250);
-const athlete5 = new AmateurAthlete(105, 'JMaria', 'DeFilippi', new Date(1967, 7, 16), 8, 300);
+const athlete5 = new AmateurAthlete(105, 'Maria', 'DeFilippi', new Date(1967, 7, 16), 8, 300);
 
 
 // Iscrizione degli atleti alle federazioni

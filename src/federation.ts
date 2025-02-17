@@ -80,22 +80,20 @@ export function getFederationCodes(): number[] {
 }
 
 // Decoratore per validare il tipo dell'atleta
-export function ValidateAthleteType(target: any, propertyKey: string, descriptor: PropertyDescriptor) {
+function ValidateAthleteType(target: any, propertyKey: string, descriptor: PropertyDescriptor) {
     const originalMethod = descriptor.value;
-    
+
     descriptor.value = function (athlete: Athlete) {
-        if (athlete.athleteType.type === "amateur") {
-            // throw new Error(`Gli atleti di tipo "Amateur" non possono iscriversi a una federazione.`);
-            console.log(`Gli atleti di tipo "Amateur" non possono iscriversi a una federazione.`);
-            return false;
+        if (athlete.athleteType.isIscrivible===false) {
+            throw new Error("Gli atleti di tipo " + athlete.athleteType.type + " non possono iscriversi a una federazione.");
             
         }
-        // Chiamata al metodo originale se il tipo dell'atleta è valido
         return originalMethod.apply(this, [athlete]);
     };
 
     return descriptor;
 }
+
 
 
 

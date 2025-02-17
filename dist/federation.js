@@ -11,7 +11,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Federation = void 0;
 exports.getFederationCodes = getFederationCodes;
-exports.ValidateAthleteType = ValidateAthleteType;
 const federations = [];
 class Federation {
     constructor(federationCode) {
@@ -85,12 +84,9 @@ function getFederationCodes() {
 function ValidateAthleteType(target, propertyKey, descriptor) {
     const originalMethod = descriptor.value;
     descriptor.value = function (athlete) {
-        if (athlete.athleteType.type === "amateur") {
-            // throw new Error(`Gli atleti di tipo "Amateur" non possono iscriversi a una federazione.`);
-            console.log(`Gli atleti di tipo "Amateur" non possono iscriversi a una federazione.`);
-            return false;
+        if (athlete.athleteType.isIscrivible === false) {
+            throw new Error("Gli atleti di tipo " + athlete.athleteType.type + " non possono iscriversi a una federazione.");
         }
-        // Chiamata al metodo originale se il tipo dell'atleta è valido
         return originalMethod.apply(this, [athlete]);
     };
     return descriptor;
