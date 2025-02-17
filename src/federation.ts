@@ -23,7 +23,6 @@ export class Federation<TAthlete extends FederableAthlete = FederableAthlete> {
     }
 
     // Iscrizione di un atleta alla federazione
-    
     registerAthlete(athlete: TAthlete): void {
         const { min, max } = athlete.athleteType.registrationCostRange;
         const isIscribible = Reflect.getMetadata("isIscribible", athlete.constructor);
@@ -36,7 +35,6 @@ export class Federation<TAthlete extends FederableAthlete = FederableAthlete> {
                     console.error("La federazione ha già il numero massimo di atleti.");
                     return;
                 }
-                
         if (athlete.getRegistrationCost() < min || athlete.getRegistrationCost() > max) {
             console.error(` Atleta ${athlete.getPersonalData()} non idoneo per l'iscrizione. La quota annua deve essere tra ${min}€ e ${max}€`);
             return;

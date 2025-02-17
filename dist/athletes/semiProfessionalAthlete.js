@@ -8,14 +8,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SemiProfessionalAthlete = void 0;
 const athlete_1 = require("./athlete");
-const athleteDecorators_1 = require("../decorators/athleteDecorators");
+const athleteDecorator_1 = require("../decorators/athleteDecorator");
 let SemiProfessionalAthlete = class SemiProfessionalAthlete extends athlete_1.Athlete {
     constructor() {
         super(...arguments);
-        this.athleteType = { type: "semiprofessional", registrationCostRange: { min: 100, max: 250 }, isIscrivible: true };
+        this.athleteType = { type: "semiprofessional", registrationCostRange: { min: 100, max: 250 } };
     }
 };
 exports.SemiProfessionalAthlete = SemiProfessionalAthlete;
 exports.SemiProfessionalAthlete = SemiProfessionalAthlete = __decorate([
-    (0, athleteDecorators_1.isIscrivibile)(true)
+    (0, athleteDecorator_1.isIscrivibile)(true)
 ], SemiProfessionalAthlete);
