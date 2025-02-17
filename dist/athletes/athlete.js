@@ -1,8 +1,13 @@
 "use strict";
+// export type AthleteType =
+//     | {type: "professional"; registrationCostRange: {min:number, max: number}}
+//     | { type: "semiprofessional" ; registrationCostRange: {min:number, max: number}}
+//     | { type: "amateur" ; registrationCostRange: {min:number, max: number}};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Athlete = void 0;
 const lastRegistrationMonth = 10;
 class Athlete {
+    // abstract readonly athleteType: AthleteType;
     constructor(athleteCode, firstName, lastName, birthDate, registrationMonth, annualFee) {
         this.athleteCode = athleteCode;
         this.firstName = firstName;

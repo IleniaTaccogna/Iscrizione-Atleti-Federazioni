@@ -16,16 +16,16 @@ class Federation {
     }
     // Iscrizione di un atleta alla federazione
     registerAthlete(athlete) {
-        const { min, max } = athlete.athleteType.registrationCostRange;
-        const isIscribible = Reflect.getMetadata("isIscribible", athlete.constructor);
-        if (isIscribible === false) {
-            console.error(`Gli atleti di tipo ${athlete.athleteType.type} non possono iscriversi a una federazione.`);
+        const isIscrivibile = Reflect.getMetadata("isIscrivibile", athlete.constructor);
+        if (isIscrivibile === false) {
+            console.error(`Gli atleti di tipo ${athlete.constructor.name} non possono iscriversi a una federazione.`);
             return;
         }
         if (this.getRegisteredAthletesCount() >= 3) {
             console.error("La federazione ha già il numero massimo di atleti.");
             return;
         }
+        const { min, max } = athlete;
         if (athlete.getRegistrationCost() < min || athlete.getRegistrationCost() > max) {
             console.error(` Atleta ${athlete.getPersonalData()} non idoneo per l'iscrizione. La quota annua deve essere tra ${min}€ e ${max}€`);
             return;

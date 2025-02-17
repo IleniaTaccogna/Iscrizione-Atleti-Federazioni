@@ -7,7 +7,7 @@ import { Federation, getFederationCodes } from './federation';
 // Creazione delle federazioni
 const atletica = new Federation(1);
 const judo = new Federation(3);
-const tennis=new Federation(2);
+const tennis = new Federation(2);
 
 
 // Creazione degli atleti

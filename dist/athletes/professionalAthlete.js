@@ -12,7 +12,9 @@ const athleteDecorator_1 = require("../decorators/athleteDecorator");
 let ProfessionalAthlete = class ProfessionalAthlete extends athlete_1.Athlete {
     constructor() {
         super(...arguments);
-        this.athleteType = { type: "professional", registrationCostRange: { min: 0, max: 0 } };
+        this.min = 0;
+        this.max = 0;
+        // readonly athleteType: { type: "professional"; registrationCostRange:{ min: number, max: number }} = { type: "professional", registrationCostRange: { min: 0, max: 0 }};
     }
 };
 exports.ProfessionalAthlete = ProfessionalAthlete;

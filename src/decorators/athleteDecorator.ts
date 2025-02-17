@@ -1,7 +1,7 @@
 import "reflect-metadata";
 
-export function isIscrivibile(isIscribible: boolean) {
+export function isIscrivibile(isIscrivibile: boolean) {
     return function(target: Function) {
-        Reflect.defineMetadata("isIscribible", isIscribible, target);
+        Reflect.defineMetadata("isIscrivibile", isIscrivibile, target);
     };
 }
