@@ -1,6 +1,7 @@
-import {  Athlete} from "./athletes/athlete";
+
 import { ProfessionalAthlete } from "./athletes/professionalAthlete";
 import { SemiProfessionalAthlete } from "./athletes/semiProfessionalAthlete";
+import  "reflect-metadata";
 
 type FederableAthlete = ProfessionalAthlete | SemiProfessionalAthlete;
 
@@ -22,9 +23,15 @@ export class Federation<TAthlete extends FederableAthlete = FederableAthlete> {
     }
 
     // Iscrizione di un atleta alla federazione
-    @ValidateAthleteType
+    
     registerAthlete(athlete: TAthlete): void {
         const { min, max } = athlete.athleteType.registrationCostRange;
+        const isIscribible = Reflect.getMetadata("isIscribible", athlete.constructor);
+
+        if (isIscribible === false) {
+            console.error(`Gli atleti di tipo ${athlete.athleteType.type} non possono iscriversi a una federazione.`);
+            return; 
+        }
         if (this.getRegisteredAthletesCount() >= 3) {
                     console.error("La federazione ha già il numero massimo di atleti.");
                     return;
@@ -79,20 +86,7 @@ export function getFederationCodes(): number[] {
     return federations.map(federation => federation.federationCode);
 }
 
-// Decoratore per validare il tipo dell'atleta
-function ValidateAthleteType(target: any, propertyKey: string, descriptor: PropertyDescriptor) {
-    const originalMethod = descriptor.value;
 
-    descriptor.value = function (athlete: Athlete) {
-        if (athlete.athleteType.isIscrivible===false) {
-            throw new Error("Gli atleti di tipo " + athlete.athleteType.type + " non possono iscriversi a una federazione.");
-            
-        }
-        return originalMethod.apply(this, [athlete]);
-    };
-
-    return descriptor;
-}
 
 
 
