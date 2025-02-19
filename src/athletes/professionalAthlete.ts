@@ -1,12 +1,11 @@
 import { Athlete } from './athlete';
-import { isIscrivibile } from '../decorators/athleteDecorator';
+import { Federable } from '../decorators/athleteDecorator';
 
 
-@isIscrivibile(true)
+@Federable(true)
 export class ProfessionalAthlete extends Athlete {
-readonly min = 0;   
-readonly max = 0;   
-    // readonly athleteType: { type: "professional"; registrationCostRange:{ min: number, max: number }} = { type: "professional", registrationCostRange: { min: 0, max: 0 }};
+    readonly min = 0;
+    readonly max = 0;
 }
 
 

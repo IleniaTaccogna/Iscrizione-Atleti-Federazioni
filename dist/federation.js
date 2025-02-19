@@ -16,7 +16,7 @@ class Federation {
     }
     // Iscrizione di un atleta alla federazione
     registerAthlete(athlete) {
-        const isIscrivibile = Reflect.getMetadata("isIscrivibile", athlete.constructor);
+        const isIscrivibile = Reflect.getMetadata("Iscrivibile", athlete.constructor);
         if (isIscrivibile === false) {
             console.error(`Gli atleti di tipo ${athlete.constructor.name} non possono iscriversi a una federazione.`);
             return;
@@ -25,13 +25,12 @@ class Federation {
             console.error("La federazione ha già il numero massimo di atleti.");
             return;
         }
-        const { min, max } = athlete;
-        if (athlete.getRegistrationCost() < min || athlete.getRegistrationCost() > max) {
-            console.error(` Atleta ${athlete.getPersonalData()} non idoneo per l'iscrizione. La quota annua deve essere tra ${min}€ e ${max}€`);
+        if (athlete.getRegistrationCost() < athlete.min || athlete.getRegistrationCost() > athlete.max) {
+            console.error(`Atleta ${athlete.getPersonalData()} non idoneo per l'iscrizione. La quota annua deve essere tra ${athlete.min}€ e ${athlete.max}€`);
             return;
         }
         this.registeredAthletes.push(athlete);
-        console.log(` Atleta ${athlete.getPersonalData()} iscritto con successo.`);
+        console.log(`Atleta ${athlete.getPersonalData()} iscritto con successo.`);
     }
     // Rimozione di un atleta dalla federazione
     removeAthlete(athlete) {

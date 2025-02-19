@@ -14,10 +14,9 @@ let ProfessionalAthlete = class ProfessionalAthlete extends athlete_1.Athlete {
         super(...arguments);
         this.min = 0;
         this.max = 0;
-        // readonly athleteType: { type: "professional"; registrationCostRange:{ min: number, max: number }} = { type: "professional", registrationCostRange: { min: 0, max: 0 }};
     }
 };
 exports.ProfessionalAthlete = ProfessionalAthlete;
 exports.ProfessionalAthlete = ProfessionalAthlete = __decorate([
-    (0, athleteDecorator_1.isIscrivibile)(true)
+    (0, athleteDecorator_1.Federable)(true)
 ], ProfessionalAthlete);

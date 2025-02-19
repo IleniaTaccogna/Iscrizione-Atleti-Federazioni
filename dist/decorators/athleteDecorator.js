@@ -1,9 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.isIscrivibile = isIscrivibile;
+exports.Federable = Federable;
 require("reflect-metadata");
-function isIscrivibile(isIscrivibile) {
+function Federable(isIscrivibile) {
     return function (target) {
-        Reflect.defineMetadata("isIscrivibile", isIscrivibile, target);
+        Reflect.defineMetadata("Iscrivibile", isIscrivibile, target);
     };
 }

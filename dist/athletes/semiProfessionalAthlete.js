@@ -14,10 +14,9 @@ let SemiProfessionalAthlete = class SemiProfessionalAthlete extends athlete_1.At
         super(...arguments);
         this.min = 100;
         this.max = 250;
-        // readonly athleteType: { type: "semiprofessional"; registrationCostRange:{ min: number, max: number }} = { type: "semiprofessional", registrationCostRange: { min: 100, max: 250 }};
     }
 };
 exports.SemiProfessionalAthlete = SemiProfessionalAthlete;
 exports.SemiProfessionalAthlete = SemiProfessionalAthlete = __decorate([
-    (0, athleteDecorator_1.isIscrivibile)(true)
+    (0, athleteDecorator_1.Federable)(true)
 ], SemiProfessionalAthlete);
